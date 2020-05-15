@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="Poker_Card_3" size="8.100000 11.802273" />
+    <ImageTarget name="Poker_Card_2" size="8.100000 11.417713" />
     <ImageTarget name="Poker_Card_1" size="6.100000 8.684237" />
     <ImageTarget name="Card_4" size="0.061000 0.100479" />
     <ImageTarget name="Card_3" size="0.061000 0.098459" />
