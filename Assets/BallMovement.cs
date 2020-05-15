@@ -35,7 +35,7 @@ public class BallMovement : MonoBehaviour
         if (!controller.isGrounded)
             velocity.y += gravity * Time.deltaTime;
 
-        transform.Rotate(Vector3.forward, rotation_speed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, rotation_speed * movement_direction.x * Time.deltaTime);    
         controller.Move(velocity * Time.deltaTime);
 
         Debug.DrawLine(transform.position, transform.position + (movement_direction * 2), Color.green);
@@ -43,8 +43,8 @@ public class BallMovement : MonoBehaviour
 
     private void Jump(Vector3 N)
     {
-        Vector3 jump_velocity = jump_power * N;
-        velocity.y = jump_power * (N.y >= 0 ? 1 : -1);
+       // ector3 jump_velocity = jump_power * N;
+        velocity.y = jump_power * (N.y > 0 ? 1 : -1);
 
         if ((N.x < 0 && movement_direction.x > 0) || (N.x > 0 && movement_direction.x < 0))
             movement_direction = -movement_direction;
@@ -56,11 +56,11 @@ public class BallMovement : MonoBehaviour
         {
             current_platform = hit.gameObject;
             velocity.y = 0;
+
+            Vector3 N = hit.transform.up;
+            if (hit.gameObject.tag == "Trampoline")
+                Jump(N);
         }
 
-        Vector3 N = hit.transform.up;
-
-        if (hit.gameObject.tag == "Trampoline")
-            Jump(N);
     }
 }
