@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
+    public enum PieceType
+    {
+        Block,
+        Trampoline,
+        SpeedBoost,
+        Portal
+    }
+
+    public PieceType type = PieceType.Block;
     public float min_y, max_y;
     bool dragging = false;
     Vector3 last_mouse_pos = Vector3.zero;

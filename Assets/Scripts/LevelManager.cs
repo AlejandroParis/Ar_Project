@@ -40,8 +40,6 @@ public class LevelManager : Singleton<LevelManager>
             GameObject map = Instantiate(level_prefabs[selected_level - 1]);
             current_level = map.GetComponent<GameLevel>();
             map.GetComponent<ObjectTargetBehaviour>().target = map_target;
-
-            BallManager.Instance.SpawnBall(map.transform, current_level.start.transform);
         }
         else if(current_level)
         {
