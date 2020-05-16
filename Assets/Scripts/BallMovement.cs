@@ -80,8 +80,6 @@ public class BallMovement : MonoBehaviour
                 sprinting = true;
                 sprint_timer = 0.0f;
             }
-
-            current_platform = hit.gameObject;
         }
 
     }

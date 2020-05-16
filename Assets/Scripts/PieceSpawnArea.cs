@@ -16,22 +16,29 @@ public class PieceSpawnArea : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Entered Collision stay");
         if (other.tag == "TargetPiece")
         {
-            Debug.Log("Entered Collision stay");
             PieceSpawner ps = other.gameObject.GetComponent<PieceSpawner>();
-            if (GetComponent<Collider>().bounds.Contains(other.bounds.min) && GetComponent<Collider>().bounds.Contains(other.bounds.max) && !ps.ready)
+            if (!ps.ready && GetComponent<Collider>().bounds.Contains(other.bounds.min) && GetComponent<Collider>().bounds.Contains(other.bounds.max))
             {
                 Debug.Log("Ready to tap");
                 ps.PieceReady(transform);
             }
-            else if(ps.ready)
+            else if (ps.ready && !GetComponent<Collider>().bounds.Contains(other.bounds.min) && !GetComponent<Collider>().bounds.Contains(other.bounds.max))
             {
                 ps.PieceUnReady();
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "TargetPiece")
+        {
+            PieceSpawner ps = other.gameObject.GetComponent<PieceSpawner>();
+            ps.PieceUnReady();
         }
     }
 }

@@ -14,8 +14,9 @@ public class Piece : MonoBehaviour
 
     public PieceType type = PieceType.Block;
     public float min_y, max_y;
-    bool dragging = false;
-    Vector3 last_mouse_pos = Vector3.zero;
+
+    protected bool dragging = false;
+    protected Vector3 last_mouse_pos = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class Piece : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         if(dragging)
         {
@@ -39,13 +40,23 @@ public class Piece : MonoBehaviour
             last_mouse_pos = curren_mouse_pos;
         }
     }
-    private void OnMouseDown()
+    protected void OnMouseDown()
     {
         dragging = true;
         last_mouse_pos = Input.mousePosition;
     }
-    private void OnMouseUp()
+    protected void OnMouseUp()
     {
         dragging = false;
+    }
+}
+
+public class PortalPiece : Piece
+{
+    public GameObject connected_portal;
+
+    public void Teleport(Transform ball)
+    {
+        ball.transform.position = connected_portal.transform.position;
     }
 }

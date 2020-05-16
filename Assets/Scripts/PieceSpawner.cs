@@ -8,13 +8,15 @@ public class PieceSpawner : MonoBehaviour
 {
     public float spawn_y_offset;
     public GameObject piece_to_spawn;
-    public GameObject map;
     public bool ready = false;
+
     Transform area_transform;
+    MeshRenderer m_renderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_renderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -22,8 +24,7 @@ public class PieceSpawner : MonoBehaviour
     {
         if(ready && Input.GetMouseButtonDown(0))
         {
-            transform.SetPositionAndRotation(area_transform.position, area_transform.rotation);
-            transform.localScale = area_transform.localScale;
+            SpawnPiece();
         }
     }
 
@@ -31,27 +32,31 @@ public class PieceSpawner : MonoBehaviour
     {
         ready = true;
         this.area_transform = area_transform;
-        GetComponent<MeshRenderer>().material.color = Color.green;
+        m_renderer.material.color = Color.green;
     }
 
     public void PieceUnReady()
     {
         ready = false;
-        GetComponent<MeshRenderer>().material.color = Color.red;
+        m_renderer.material.color = Color.red;
     }
 
     private void OnMouseDown()
     {
-        SpawnPiece();
+       // SpawnPiece();
     }
 
     private void SpawnPiece()
     {
-        Vector3 spawn_position = transform.position;
+        /*Vector3 spawn_position = transform.position;
         spawn_position.y = spawn_position.y + spawn_y_offset;
-        spawn_position.z = 0;
+        spawn_position.z = 0;*/
 
-        GameObject piece = GameObject.Instantiate(piece_to_spawn, spawn_position, Quaternion.identity, map.transform);
+       // transform.SetPositionAndRotation(area_transform.position, area_transform.rotation);
+       // transform.localScale = area_transform.localScale;
+
+        GameObject piece = GameObject.Instantiate(piece_to_spawn, area_transform.position, area_transform.rotation, LevelManager.Instance.current_level.transform);
+        piece.transform.localScale = area_transform.localScale;
 
         PieceManager.Instance.OnPieceSpawn(piece);
     }

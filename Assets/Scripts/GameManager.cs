@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     public void StartLevel()
     {
         game_state = GameState.Deployment;
-        GetComponent<LevelManager>().current_level.OnDeployState();
+        LevelManager.Instance.current_level.OnDeployState();
     }
 
     public void RunLevel()
