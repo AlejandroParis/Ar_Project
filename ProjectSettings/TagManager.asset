@@ -8,6 +8,8 @@ TagManager:
   - End
   - Piece
   - Trampoline
+  - SpawnArea
+  - TargetPiece
   layers:
   - Default
   - TransparentFX
