@@ -28,6 +28,12 @@ public class GameManager : Singleton<GameManager>
 
     public void StartLevel()
     {
+        game_state = GameState.Deployment;
+        GetComponent<LevelManager>().current_level.OnDeployState();
+    }
+
+    public void RunLevel()
+    {
         game_state = GameState.Running;
 
         BallManager.Instance.UnlockBall();

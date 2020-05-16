@@ -9,6 +9,8 @@ public class PieceSpawner : MonoBehaviour
     public float spawn_y_offset;
     public GameObject piece_to_spawn;
     public GameObject map;
+    public bool ready = false;
+    Transform area_transform;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,24 @@ public class PieceSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(ready && Input.GetMouseButtonDown(0))
+        {
+            transform.SetPositionAndRotation(area_transform.position, area_transform.rotation);
+            transform.localScale = area_transform.localScale;
+        }
+    }
+
+    public void PieceReady(Transform area_transform)
+    {
+        ready = true;
+        this.area_transform = area_transform;
+        GetComponent<MeshRenderer>().material.color = Color.green;
+    }
+
+    public void PieceUnReady()
+    {
+        ready = false;
+        GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     private void OnMouseDown()
