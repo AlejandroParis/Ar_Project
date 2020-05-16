@@ -32,6 +32,8 @@ public class PieceSpawner : MonoBehaviour
         spawn_position.y = spawn_position.y + spawn_y_offset;
         spawn_position.z = 0;
 
-        GameObject.Instantiate(piece_to_spawn, spawn_position, Quaternion.identity, map.transform);
+        GameObject piece = GameObject.Instantiate(piece_to_spawn, spawn_position, Quaternion.identity, map.transform);
+
+        PieceManager.Instance.OnPieceSpawn(piece);
     }
 }

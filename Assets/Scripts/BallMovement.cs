@@ -61,6 +61,13 @@ public class BallMovement : MonoBehaviour
             if (hit.gameObject.tag == "Trampoline")
                 Jump(N);
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "DeathTrigger")
+        {
+            LevelManager.Instance.OnBallFall();
+        }
     }
 }
