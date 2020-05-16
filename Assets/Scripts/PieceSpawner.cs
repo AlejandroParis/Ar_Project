@@ -22,7 +22,8 @@ public class PieceSpawner : MonoBehaviour
     {
         if(ready && Input.GetMouseButtonDown(0))
         {
-
+            transform.SetPositionAndRotation(area_transform.position, area_transform.rotation);
+            transform.localScale = area_transform.localScale;
         }
     }
 
