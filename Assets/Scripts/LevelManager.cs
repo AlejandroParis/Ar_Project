@@ -7,19 +7,20 @@ public class LevelManager : Singleton<LevelManager>
     public int selected_level = 1;
 
     public GameObject map_target;
-    GameLevel current_level = null;
+    public GameLevel current_level = null;
     public List<GameObject> level_prefabs;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnReachEnd()
@@ -55,8 +56,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (current_level)
         {
-            current_level.gameObject.SetActive(false);
-            BallManager.Instance.LockBall();
+            //current_level.gameObject.SetActive(false);
+            //BallManager.Instance.LockBall();
         }
     }
 

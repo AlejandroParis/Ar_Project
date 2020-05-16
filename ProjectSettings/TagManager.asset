@@ -7,6 +7,8 @@ TagManager:
   - Trampoline
   - DeathTrigger
   - End
+  - SpawnArea
+  - TargetPiece
   layers:
   - Default
   - TransparentFX
