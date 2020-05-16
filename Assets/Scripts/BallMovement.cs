@@ -6,12 +6,19 @@ public class BallMovement : MonoBehaviour
 {
     GameObject current_platform = null;
     CharacterController controller;
+   
     Vector3 movement_direction;
     Vector3 velocity;
+
     public float movement_speed = 10.0f;
+    public float sprint_speed = 14.0f;
     public float gravity = -9.8f;
-    public float rotation_speed = -90.0f;
+    public float rotation_speed = 30.0f;
     public float jump_power = 500.0f;
+    public float sprint_duration = 5.0f;
+
+    bool sprinting = false;
+    float sprint_timer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,27 +30,33 @@ public class BallMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Sprint timer, move to Sprinting State if it's ever done.
+        if(sprinting && sprint_timer <= sprint_duration)
+        {
+            sprint_timer += Time.deltaTime;
+            if (sprint_timer >= sprint_duration)
+                sprinting = false;
+
+        }
+
         if ((controller.collisionFlags & CollisionFlags.Sides) != 0) //Check if controller has collided from the side to swap direction.
             movement_direction = -movement_direction;
 
         //Keep y velocity
         float curr_y = velocity.y;
-        velocity = movement_direction * movement_speed;
+        velocity = movement_direction * (sprinting? sprint_speed:movement_speed);
         velocity.y = curr_y;
 
         //Apply gravity
         if (!controller.isGrounded)
             velocity.y += gravity * Time.deltaTime;
 
-        transform.Rotate(Vector3.forward, rotation_speed * movement_direction.x * Time.deltaTime);    
+        transform.Rotate(Vector3.forward, rotation_speed * velocity.magnitude * movement_direction.x * Time.deltaTime);    
         controller.Move(velocity * Time.deltaTime);
-
-        Debug.DrawLine(transform.position, transform.position + (movement_direction * 2), Color.green);
     }
 
     private void Jump(Vector3 N)
     {
-       // ector3 jump_velocity = jump_power * N;
         velocity.y = jump_power * (N.y > 0 ? 1 : -1);
 
         if ((N.x < 0 && movement_direction.x > 0) || (N.x > 0 && movement_direction.x < 0))
@@ -52,15 +65,25 @@ public class BallMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(current_platform != hit.gameObject)
+        if (hit.gameObject.tag == "Piece")
         {
-            current_platform = hit.gameObject;
-            velocity.y = 0;
+            Piece piece = hit.gameObject.GetComponent<Piece>();
 
-            Vector3 N = hit.transform.up;
-            if (hit.gameObject.tag == "Trampoline")
+            if (current_platform != piece.gameObject && piece.type == Piece.PieceType.Trampoline)
+            {
+                Vector3 N = hit.transform.up;
                 Jump(N);
+            }
+
+            if (piece.type == Piece.PieceType.SpeedBoost)
+            {
+                sprinting = true;
+                sprint_timer = 0.0f;
+            }
+
+            current_platform = hit.gameObject;
         }
+
     }
 
     private void OnTriggerEnter(Collider other)

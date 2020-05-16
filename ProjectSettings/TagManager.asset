@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Trampoline
   - DeathTrigger
   - End
+  - Piece
+  - Trampoline
   layers:
   - Default
   - TransparentFX

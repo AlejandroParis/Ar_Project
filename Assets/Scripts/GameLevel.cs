@@ -9,7 +9,7 @@ public class GameLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        BallManager.Instance.SpawnBall(transform, start.transform);
     }
 
     // Update is called once per frame
