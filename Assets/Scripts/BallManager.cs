@@ -6,7 +6,7 @@ using UnityEngine;
 public class BallManager : Singleton<BallManager>
 {
     public GameObject selected_ball;
-    BallMovement ball;
+    public BallMovement ball;
 
     // Start is called before the first frame update
     void Start()

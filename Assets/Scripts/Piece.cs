@@ -50,13 +50,3 @@ public class Piece : MonoBehaviour
         dragging = false;
     }
 }
-
-public class PortalPiece : Piece
-{
-    public GameObject connected_portal;
-
-    public void Teleport(Transform ball)
-    {
-        ball.transform.position = connected_portal.transform.position;
-    }
-}

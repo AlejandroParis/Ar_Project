@@ -10,6 +10,7 @@ TagManager:
   - Trampoline
   - SpawnArea
   - TargetPiece
+  - Ball
   layers:
   - Default
   - TransparentFX

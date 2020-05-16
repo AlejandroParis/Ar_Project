@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3141778757466365862}
   m_Layer: 0
   m_Name: Basic_Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002e6c4eeaf8cc3408a9d7521073093c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  current_platform: {fileID: 0}
   movement_speed: 8
   sprint_speed: 14
   gravity: -9.8

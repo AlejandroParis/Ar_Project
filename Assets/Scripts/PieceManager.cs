@@ -7,7 +7,6 @@ public class PieceManager : Singleton<PieceManager>
 {
     public List<GameObject> spawned_pieces;
 
-
     // Start is called before the first frame update
     void Start()
     {

@@ -52,8 +52,8 @@ public class PieceSpawner : MonoBehaviour
         spawn_position.y = spawn_position.y + spawn_y_offset;
         spawn_position.z = 0;*/
 
-       // transform.SetPositionAndRotation(area_transform.position, area_transform.rotation);
-       // transform.localScale = area_transform.localScale;
+        //transform.SetPositionAndRotation(area_transform.position, area_transform.rotation);
+        //transform.localScale = area_transform.localScale;
 
         GameObject piece = GameObject.Instantiate(piece_to_spawn, area_transform.position, area_transform.rotation, LevelManager.Instance.current_level.transform);
         piece.transform.localScale = area_transform.localScale;
