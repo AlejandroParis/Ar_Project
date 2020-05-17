@@ -43,7 +43,11 @@ public class BallMovement : MonoBehaviour
         }
 
         if ((controller.collisionFlags & CollisionFlags.Sides) != 0) //Check if controller has collided from the side to swap direction.
+        {
             movement_direction = -movement_direction;
+            velocity = Vector3.zero;
+        }
+           
 
         if(!controller.isGrounded && !air) //fuck this
         {
@@ -67,6 +71,7 @@ public class BallMovement : MonoBehaviour
 
     private void Jump(Vector3 N)
     {
+        air = true;
         velocity.y = jump_power * (N.y > 0 ? 1 : -1);
 
         if ((N.x < 0 && movement_direction.x > 0) || (N.x > 0 && movement_direction.x < 0))
@@ -91,7 +96,7 @@ public class BallMovement : MonoBehaviour
                 sprint_timer = 0.0f;
             }
 
-            if (piece.type != Piece.PieceType.Portal)
+            if (current_platform != piece.gameObject && piece.type != Piece.PieceType.Portal && piece.type != Piece.PieceType.Trampoline)
                 SetPlatform(piece.gameObject);
         }
 
@@ -102,11 +107,16 @@ public class BallMovement : MonoBehaviour
         velocity.y = 0;
         air = false;
         Vector3 N = gameObject.transform.up;
-        N = Quaternion.Euler(0, 0, -90) * N; 
+        N = Quaternion.Euler(0, 0, -90) * N;
+
+        if (N.y > 0.6)
+            return;
+            
         if (movement_direction.x < 0)
             N = -N;
 
         movement_direction = N;
+        current_platform = gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
