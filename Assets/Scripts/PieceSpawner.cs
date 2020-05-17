@@ -26,6 +26,8 @@ public class PieceSpawner : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         pieces_to_spawn[(int)current_spawn_type].SetActive(true);
+
+        this.gameObject.SetActive(false);
         //m_renderer = GetComponent<MeshRenderer>();
     }
 
@@ -81,7 +83,8 @@ public class PieceSpawner : MonoBehaviour
         //transform.localScale = area_transform.localScale;
 
         GameObject piece = GameObject.Instantiate(pieces_to_spawn[(int)current_spawn_type], spawn_position, transform.rotation, LevelManager.Instance.current_level.transform);
-        piece.transform.localScale = transform.localScale;
+        piece.GetComponent<BoxCollider>().enabled = true;
+        piece.GetComponent<Piece>().enabled = true;
 
         PieceManager.Instance.OnPieceSpawn(piece);
     }

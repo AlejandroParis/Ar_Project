@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,10 @@ public class BallMovement : MonoBehaviour
    
     Vector3 movement_direction;
     Vector3 velocity;
+    bool air = false;
 
     public float movement_speed = 10.0f;
+    public float acceleration = 5.0f;
     public float sprint_speed = 14.0f;
     public float gravity = -9.8f;
     public float rotation_speed = 30.0f;
@@ -42,17 +45,24 @@ public class BallMovement : MonoBehaviour
         if ((controller.collisionFlags & CollisionFlags.Sides) != 0) //Check if controller has collided from the side to swap direction.
             movement_direction = -movement_direction;
 
+        if(!controller.isGrounded && !air) //fuck this
+        {
+            velocity.y = movement_direction.y * movement_speed;
+            air = true;
+        }
+
         //Keep y velocity
-        float curr_y = velocity.y;
-        velocity = movement_direction * (sprinting? sprint_speed:movement_speed);
-        velocity.y = curr_y;
+        Vector3 new_v = movement_direction * acceleration;
+        velocity += new_v * Time.deltaTime;
+        velocity.x = Mathf.Clamp(velocity.x, sprinting ? -sprint_speed : -movement_speed, sprinting ? sprint_speed : movement_speed);
 
         //Apply gravity
-        if (!controller.isGrounded)
-            velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.deltaTime;
 
         transform.Rotate(Vector3.forward, rotation_speed * velocity.magnitude * movement_direction.x * Time.deltaTime);    
         controller.Move(velocity * Time.deltaTime);
+
+        Debug.DrawLine(transform.position, transform.position + movement_direction * 2);
     }
 
     private void Jump(Vector3 N)
@@ -82,9 +92,21 @@ public class BallMovement : MonoBehaviour
             }
 
             if (piece.type != Piece.PieceType.Portal)
-                current_platform = piece.gameObject;
+                SetPlatform(piece.gameObject);
         }
 
+    }
+
+    public void SetPlatform(GameObject gameObject)
+    {
+        velocity.y = 0;
+        air = false;
+        Vector3 N = gameObject.transform.up;
+        N = Quaternion.Euler(0, 0, -90) * N; 
+        if (movement_direction.x < 0)
+            N = -N;
+
+        movement_direction = N;
     }
 
     private void OnTriggerEnter(Collider other)

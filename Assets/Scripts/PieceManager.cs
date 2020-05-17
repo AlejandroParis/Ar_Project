@@ -20,8 +20,28 @@ public class PieceManager : Singleton<PieceManager>
 
     }
 
+    public void OnTargetFound()
+    {
+        if(GameManager.Instance.game_state == GameManager.GameState.Deployment)
+            piece_spawner.gameObject.SetActive(true);
+    }
+    public void OnTargetLost()
+    {
+        piece_spawner.gameObject.SetActive(false);
+    }
+
     internal void OnPieceSpawn(GameObject piece)
     {
         spawned_pieces.Add(piece);
+    }
+
+    internal void OnRun()
+    {
+        piece_spawner.gameObject.SetActive(false);
+    }
+
+    internal void OnDeployment()
+    {
+       // piece_spawner.gameObject.SetActive(true);
     }
 }

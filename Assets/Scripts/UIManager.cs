@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     public GameObject canvas;
+    public GameObject piece_buttons;
+
     enum CONTROL_BUTTONS { DEPLOY = 0, RUN, PAUSE};
     // Start is called before the first frame update
     void Start()
@@ -22,5 +25,15 @@ public class UIManager : MonoBehaviour
     public void OnPieceButtonClick(int type)
     {
         PieceManager.Instance.piece_spawner.SetSpawnerType((Piece.PieceType)type);
+    }
+
+    internal void OnRun()
+    {
+        piece_buttons.SetActive(false);
+    }
+
+    internal void OnDeployment()
+    {
+        piece_buttons.SetActive(true);
     }
 }

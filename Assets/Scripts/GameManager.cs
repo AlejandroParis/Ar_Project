@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,13 +30,14 @@ public class GameManager : Singleton<GameManager>
     public void StartLevel()
     {
         game_state = GameState.Deployment;
-        LevelManager.Instance.current_level.OnDeployState();
     }
 
     public void RunLevel()
     {
         game_state = GameState.Running;
 
+        PieceManager.Instance.OnRun();
+        UIManager.Instance.OnRun();
         BallManager.Instance.UnlockBall();
     }
 
@@ -44,5 +46,13 @@ public class GameManager : Singleton<GameManager>
         game_state = GameState.Paused;
 
         BallManager.Instance.LockBall();
+    }
+
+    internal void StartDeploymentPhase()
+    {
+        game_state = GameState.Deployment;
+
+        PieceManager.Instance.OnDeployment();
+        UIManager.Instance.OnDeployment();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,22 +11,9 @@ public class LevelManager : Singleton<LevelManager>
     public GameLevel current_level = null;
     public List<GameObject> level_prefabs;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnReachEnd()
     {
-
+        BallManager.Instance.LockBall();
     }
 
     public void OnBallFall()
@@ -35,21 +23,29 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnTargetFound()
     {
-        if(current_level == null && level_prefabs.Count >= selected_level)
+        if(!current_level)
         {
+            SpawnNewLevel(selected_level);
+        }
+        else
+        {
+            current_level.gameObject.SetActive(true);
+        }
+    }
+
+    private void SpawnNewLevel(int index)
+    {
+        if(level_prefabs.Count >= index)
+        {
+            selected_level = index;
             GameObject map = Instantiate(level_prefabs[selected_level - 1]);
             current_level = map.GetComponent<GameLevel>();
             map.GetComponent<ObjectTargetBehaviour>().target = map_target;
-        }
-        else if(current_level)
-        {
-            current_level.gameObject.SetActive(true);
-            if(GameManager.Instance.game_state == GameManager.GameState.Running)
-            {
-                BallManager.Instance.UnlockBall();
-            }
-        }
+
+            GameManager.Instance.StartDeploymentPhase();
+        }       
     }
+
     public void OnTargetLost()
     {
         if (current_level)
