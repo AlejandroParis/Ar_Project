@@ -30,9 +30,15 @@ public class PieceManager : Singleton<PieceManager>
         piece_spawner.gameObject.SetActive(false);
     }
 
-    internal void OnPieceSpawn(GameObject piece)
+    internal void OnPieceSpawn(Piece piece)
     {
-        spawned_pieces.Add(piece);
+        if(piece.type == Piece.PieceType.Portal && LevelManager.Instance.current_level.free_portal)
+        {
+            ((PortalPiece)piece).connected_portal = LevelManager.Instance.current_level.free_portal.transform.GetChild(0).gameObject;
+            LevelManager.Instance.current_level.free_portal.GetComponent<PortalPiece>().connected_portal = piece.transform.GetChild(0).gameObject;
+            LevelManager.Instance.current_level.free_portal = null;
+        }
+        spawned_pieces.Add(piece.gameObject);
     }
 
     internal void OnRun()
