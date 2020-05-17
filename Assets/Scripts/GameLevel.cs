@@ -5,19 +5,21 @@ using UnityEngine;
 public class GameLevel : MonoBehaviour
 {
     public GameObject start, end;
-    public GameObject[] spawn_areas;
     public GameObject free_portal;
+
+    [System.Serializable]
+    public struct PieceAvailable
+    {
+       public Piece.PieceType type;
+       public int number;
+    }
+
+    public PieceAvailable[] available_pieces;
 
     // Start is called before the first frame update
     void Start()
     {
         BallManager.Instance.SpawnBall(transform, start.transform);
-
-        spawn_areas = GameObject.FindGameObjectsWithTag("SpawnArea");
-        foreach (GameObject sa in spawn_areas)
-        {
-            sa.SetActive(false);
-        }
     }
 
     // Update is called once per frame
@@ -26,21 +28,34 @@ public class GameLevel : MonoBehaviour
 
     }
 
-    public void EnableSpawnAreas()
+    public int CheckPiecesAvailable(Piece.PieceType type)
     {
-        if (GameManager.Instance.game_state == GameManager.GameState.Deployment)
+        foreach (PieceAvailable pa in available_pieces)
         {
-            foreach (GameObject sa in spawn_areas)
+            if(pa.type == type)
             {
-                if (!sa.activeSelf)
-                    sa.SetActive(true);
+                return pa.number;
             }
+        }
 
+        return 0;
+    }
+
+    public void DecreasePiece(Piece.PieceType type)
+    {
+        for(int i = 0; i < available_pieces.Length; ++i)
+        {
+            if (available_pieces[i].type == type)
+                available_pieces[i].number--;
         }
     }
 
-    public void OnDeployState()
+    public void IncreasePiece(Piece.PieceType type)
     {
-        EnableSpawnAreas();
+        for (int i = 0; i < available_pieces.Length; ++i)
+        {
+            if (available_pieces[i].type == type)
+                available_pieces[i].number++;
+        }
     }
 }

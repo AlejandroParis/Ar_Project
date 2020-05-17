@@ -88,5 +88,7 @@ public class PieceSpawner : MonoBehaviour
         piece.enabled = true;
 
         PieceManager.Instance.OnPieceSpawn(piece);
+        LevelManager.Instance.current_level.DecreasePiece(piece.type);
+        UIManager.Instance.UpdateAvailablePiecesButtons();
     }
 }
