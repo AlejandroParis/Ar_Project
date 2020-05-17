@@ -6,6 +6,7 @@ using UnityEngine;
 public class PieceManager : Singleton<PieceManager>
 {
     public List<GameObject> spawned_pieces;
+    public PieceSpawner piece_spawner;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class PieceManager : Singleton<PieceManager>
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     internal void OnPieceSpawn(GameObject piece)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PieceSpawnArea : MonoBehaviour
+/*public class PieceSpawnArea : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -41,4 +41,4 @@ public class PieceSpawnArea : MonoBehaviour
             ps.PieceUnReady();
         }
     }
-}
+}*/
