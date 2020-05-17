@@ -49,5 +49,6 @@ public class PieceManager : Singleton<PieceManager>
     internal void OnDeployment()
     {
        // piece_spawner.gameObject.SetActive(true);
+
     }
 }

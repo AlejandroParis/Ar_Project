@@ -54,6 +54,4 @@ public class LevelManager : Singleton<LevelManager>
             //BallManager.Instance.LockBall();
         }
     }
-
-
 }

@@ -110,8 +110,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 805081220873680022}
   end: {fileID: 2224641312250340601}
-  spawn_areas: []
   free_portal: {fileID: 6746550033525515220}
+  available_pieces:
+  - type: 0
+    number: 2
+  - type: 3
+    number: 1
 --- !u!1001 &1278759056
 PrefabInstance:
   m_ObjectHideFlags: 0
