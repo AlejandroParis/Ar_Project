@@ -39,6 +39,11 @@ public class UIManager : Singleton<UIManager>
         UpdateAvailablePiecesButtons();
     }
 
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+
     public void UpdateAvailablePiecesButtons()
     {
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Block) > 0)
