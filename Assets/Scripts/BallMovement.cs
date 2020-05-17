@@ -47,7 +47,7 @@ public class BallMovement : MonoBehaviour
 
         if(!controller.isGrounded && !air) //fuck this
         {
-            velocity.y = movement_direction.y * movement_speed;
+            velocity.y = movement_direction.y * (sprinting ? sprint_speed : movement_speed);
             air = true;
         }
 
