@@ -28,7 +28,7 @@ public class Piece : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        if(dragging)
+       /* if(dragging)
         {
             Vector3 curren_mouse_pos = Input.mousePosition;
             if(curren_mouse_pos.y != last_mouse_pos.y)
@@ -39,15 +39,15 @@ public class Piece : MonoBehaviour
                 transform.position = tmp_position;
             }
             last_mouse_pos = curren_mouse_pos;
-        }
+        }*/
     }
     protected void OnMouseDown()
     {
-        dragging = true;
-        last_mouse_pos = Input.mousePosition;
+       /* dragging = true;
+        last_mouse_pos = Input.mousePosition;*/
     }
     protected void OnMouseUp()
     {
-        dragging = false;
+        //dragging = false;
     }
 }

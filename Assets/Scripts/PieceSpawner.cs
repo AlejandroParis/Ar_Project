@@ -83,7 +83,11 @@ public class PieceSpawner : MonoBehaviour
         //transform.localScale = area_transform.localScale;
 
         GameObject p_go = GameObject.Instantiate(pieces_to_spawn[(int)current_spawn_type], spawn_position, transform.rotation, LevelManager.Instance.current_level.transform);
-        p_go.GetComponent<BoxCollider>().enabled = true;
+        BoxCollider[] colls = p_go.GetComponents<BoxCollider>();
+        foreach (BoxCollider item in colls)
+        {
+            item.enabled = true;
+        }
         Piece piece = p_go.GetComponent<Piece>();
         piece.enabled = true;
 
