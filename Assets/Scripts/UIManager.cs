@@ -52,6 +52,7 @@ public class UIManager : Singleton<UIManager>
     public void RestartButton()
     {
         GameManager.Instance.Restart();
+        UpdateAvailablePiecesButtons();
     }
 
     public void MenuButton()
