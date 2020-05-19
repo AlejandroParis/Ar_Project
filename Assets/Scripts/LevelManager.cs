@@ -68,6 +68,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLevel(int index)
     {
+        map_target.SetActive(true);
+
         if (current_level)
         {
             Destroy(current_level.gameObject);
