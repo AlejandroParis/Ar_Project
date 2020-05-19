@@ -60,7 +60,6 @@ public class UIManager : Singleton<UIManager>
     {
         win_panel.SetActive(false);
         GameManager.Instance.Restart();
-        UpdateAvailablePiecesButtons();
     }
 
     public void MenuButton()
