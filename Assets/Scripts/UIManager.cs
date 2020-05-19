@@ -28,6 +28,12 @@ public class UIManager : Singleton<UIManager>
         
     }
 
+    internal void OnReachEnd()
+    {
+        win_panel.SetActive(true);
+        win_panel.transform.GetChild(3).GetComponent<Button>().interactable = LevelManager.Instance.HasNextLevel();         
+    }
+
     public void OnPieceButtonClick(int type)
     {
         PieceManager.Instance.piece_spawner.SetSpawnerType((Piece.PieceType)type);
@@ -46,17 +52,19 @@ public class UIManager : Singleton<UIManager>
 
     public void NextLevelButton()
     {
-        LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level++);
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level + 1);
+        win_panel.SetActive(false);
     }
 
     public void RestartButton()
     {
+        win_panel.SetActive(false);
         GameManager.Instance.Restart();
-        UpdateAvailablePiecesButtons();
     }
 
     public void MenuButton()
     {
+        win_panel.SetActive(false);
         DisableGUI();
         EnableLevelSelection();
     }

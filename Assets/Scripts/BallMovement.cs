@@ -27,7 +27,7 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        movement_direction = Vector3.right;
+        movement_direction = transform.right;
     }
 
     // Update is called once per frame
@@ -67,6 +67,13 @@ public class BallMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         Debug.DrawLine(transform.position, transform.position + movement_direction * 2);
+    }
+
+    internal void Reset()
+    {
+        transform.rotation = Quaternion.identity;
+        movement_direction = transform.right;
+        velocity = Vector3.zero;
     }
 
     private void Jump(Vector3 N)

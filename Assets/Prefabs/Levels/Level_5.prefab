@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 7851952132129781847}
   end: {fileID: 5549473602827757577}
-  free_portal: {fileID: 0}
+  free_portal: {fileID: 5983072888678769822}
   available_pieces:
   - type: 0
     number: 2
@@ -187,6 +187,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d745d03afa8a9d41b4cfa24a5670648, type: 3}
+--- !u!1 &5983072888678769822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6878109810221133743, guid: 5d745d03afa8a9d41b4cfa24a5670648,
+    type: 3}
+  m_PrefabInstance: {fileID: 899542870605417265}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5983072888678455602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6878109810220913155, guid: 5d745d03afa8a9d41b4cfa24a5670648,

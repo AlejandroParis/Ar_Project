@@ -20,16 +20,16 @@ public class LevelManager : Singleton<LevelManager>
     }
     private void Start()
     {
-        map_target.SetActive(false);
     }
     public void OnReachEnd()
     {
         BallManager.Instance.LockBall();
+        UIManager.Instance.OnReachEnd();
     }
 
     public void OnBallFall()
     {
-        BallManager.Instance.ResetBall(current_level.start.transform);
+        GameManager.Instance.Restart();
     }
 
     public void OnTargetFound()
@@ -44,9 +44,14 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    internal bool HasNextLevel()
+    {
+        return level_prefabs.Count > (selected_level + 1);
+    }
+
     private void SpawnNewLevel(int index)
     {
-        if(level_prefabs.Count >= index)
+        if(level_prefabs.Count >= index && index >= 0)
         {
             selected_level = index;
             GameObject map = Instantiate(level_prefabs[selected_level]);
@@ -68,8 +73,6 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLevel(int index)
     {
-        map_target.SetActive(true);
-
         if (current_level)
         {
             Destroy(current_level.gameObject);
