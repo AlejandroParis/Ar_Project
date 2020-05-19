@@ -21,12 +21,21 @@ public class UIManager : Singleton<UIManager>
     public AudioClip button_sound;
     public AudioClip reset_sound;
 
+    Color active_color;
+    Color inactive_color;
+
     enum CONTROL_BUTTONS { DEPLOY = 0, RUN, PAUSE};
     // Start is called before the first frame update
     void Start()
     {
         ui_audio = canvas.GetComponent<AudioSource>();
         DisableGUI();
+
+        active_color = Color.white;
+        active_color.a = 0.8f;
+
+        inactive_color = Color.grey;
+        inactive_color.a = 0.2f;
     }
 
     internal void OnReachEnd()
@@ -99,44 +108,52 @@ public class UIManager : Singleton<UIManager>
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Block).gameObject.GetComponent<Button>().interactable = true;
             piece_buttons.transform.GetChild((int)Piece.PieceType.Block).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Block).ToString();
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Block).GetChild(1).GetComponent<Image>().color = active_color;
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Block).gameObject.GetComponent<Button>().interactable = false;
             piece_buttons.transform.GetChild((int)Piece.PieceType.Block).GetChild(0).GetComponent<Text>().text = "0";
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Block).GetChild(1).GetComponent<Image>().color = inactive_color;
         }
 
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Portal) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).gameObject.GetComponent<Button>().interactable = true;
             piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Portal).ToString();
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).GetChild(1).GetComponent<Image>().color = active_color;
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).gameObject.GetComponent<Button>().interactable = false;
             piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).GetChild(0).GetComponent<Text>().text = "0";
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).GetChild(1).GetComponent<Image>().color = inactive_color;
         }
 
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.SpeedBoost) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).gameObject.GetComponent<Button>().interactable = true;
             piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.SpeedBoost).ToString();
+            piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).GetChild(1).GetComponent<Image>().color = active_color;
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).gameObject.GetComponent<Button>().interactable = false;
             piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).GetChild(0).GetComponent<Text>().text = "0";
+            piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).GetChild(1).GetComponent<Image>().color = inactive_color;
         }
 
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Trampoline) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).gameObject.GetComponent<Button>().interactable = true;
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Trampoline).ToString();
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).GetChild(1).GetComponent<Image>().color = active_color;
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).gameObject.GetComponent<Button>().interactable = false;
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).GetChild(0).GetComponent<Text>().text = "0";
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).GetChild(1).GetComponent<Image>().color = inactive_color;
         }
     }
 
