@@ -16,10 +16,16 @@ public class GameLevel : MonoBehaviour
 
     public PieceAvailable[] available_pieces;
 
+    public int[] available_pieces_save;
+
     // Start is called before the first frame update
     void Start()
     {
         BallManager.Instance.SpawnBall(transform, start.transform);
+        available_pieces_save[(int)Piece.PieceType.Block] = available_pieces[(int)Piece.PieceType.Block].number;
+        available_pieces_save[(int)Piece.PieceType.Trampoline] = available_pieces[(int)Piece.PieceType.Trampoline].number;
+        available_pieces_save[(int)Piece.PieceType.SpeedBoost] = available_pieces[(int)Piece.PieceType.SpeedBoost].number;
+        available_pieces_save[(int)Piece.PieceType.Portal] = available_pieces[(int)Piece.PieceType.Portal].number;
     }
 
     // Update is called once per frame
@@ -57,5 +63,13 @@ public class GameLevel : MonoBehaviour
             if (available_pieces[i].type == type)
                 available_pieces[i].number++;
         }
+    }
+
+    public void OnLevelRestart()
+    {
+        available_pieces[(int)Piece.PieceType.Block].number = available_pieces_save[(int)Piece.PieceType.Block];
+        available_pieces[(int)Piece.PieceType.Trampoline].number = available_pieces_save[(int)Piece.PieceType.Trampoline];
+        available_pieces[(int)Piece.PieceType.SpeedBoost].number = available_pieces_save[(int)Piece.PieceType.SpeedBoost];
+        available_pieces[(int)Piece.PieceType.Portal].number = available_pieces_save[(int)Piece.PieceType.Portal];
     }
 }
