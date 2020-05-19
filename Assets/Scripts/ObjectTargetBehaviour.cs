@@ -24,7 +24,7 @@ public class ObjectTargetBehaviour : MonoBehaviour
         else
         {
             transform.position = new Vector3(target.transform.position.x, target.transform.position.y, LevelManager.Instance.current_level.transform.position.z);
-            transform.rotation = Quaternion.Euler(0, 0, -target.transform.rotation.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(0, 0, target.transform.rotation.eulerAngles.z);
         }          
 
     }
