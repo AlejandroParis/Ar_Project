@@ -116,11 +116,12 @@ MonoBehaviour:
   - type: 0
     number: 2
   - type: 1
-    number: 3
+    number: 5
   - type: 2
     number: 2
   - type: 3
     number: 0
+  available_pieces_save: 
 --- !u!1001 &1576448554034351084
 PrefabInstance:
   m_ObjectHideFlags: 0
