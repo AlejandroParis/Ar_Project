@@ -110,13 +110,13 @@ MonoBehaviour:
   free_portal: {fileID: 0}
   available_pieces:
   - type: 0
-    number: 2
+    number: 1
   - type: 1
     number: 1
   - type: 2
-    number: 0
+    number: 1
   - type: 3
-    number: 0
+    number: 1
 --- !u!1001 &8015445227517717083
 PrefabInstance:
   m_ObjectHideFlags: 0

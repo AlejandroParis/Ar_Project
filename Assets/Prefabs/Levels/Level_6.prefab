@@ -116,11 +116,11 @@ MonoBehaviour:
   - type: 0
     number: 2
   - type: 1
-    number: 1
+    number: 3
   - type: 2
-    number: 1
+    number: 2
   - type: 3
-    number: 1
+    number: 0
 --- !u!1001 &1576448554034351084
 PrefabInstance:
   m_ObjectHideFlags: 0
