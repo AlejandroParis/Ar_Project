@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject level_selection;
     public GameObject run_button;
     public GameObject pause_button;
+    public GameObject win_panel;
 
     enum CONTROL_BUTTONS { DEPLOY = 0, RUN, PAUSE};
     // Start is called before the first frame update
@@ -41,6 +42,21 @@ public class UIManager : Singleton<UIManager>
     {
         piece_buttons.SetActive(true);
         UpdateAvailablePiecesButtons();
+    }
+
+    public void NextLevelButton()
+    {
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level++);
+    }
+
+    public void RestartButton()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void MenuButton()
+    {
+
     }
 
     public void ExitApp()
