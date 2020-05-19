@@ -79,10 +79,13 @@ public class BallMovement : MonoBehaviour
     private void Jump(Vector3 N)
     {
         air = true;
-        velocity.y = jump_power * (N.y > 0 ? 1 : -1);
-
         if ((N.x < 0 && movement_direction.x > 0) || (N.x > 0 && movement_direction.x < 0))
-            movement_direction = -movement_direction;
+        {
+            velocity = -velocity;
+        }
+
+        movement_direction = N;
+        velocity.y = jump_power * (N.y > 0 ? 1 : -1);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
