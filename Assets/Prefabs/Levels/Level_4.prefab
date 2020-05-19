@@ -118,6 +118,7 @@ MonoBehaviour:
     number: 0
   - type: 3
     number: 1
+  available_pieces_save: 
 --- !u!1001 &899542870605417265
 PrefabInstance:
   m_ObjectHideFlags: 0

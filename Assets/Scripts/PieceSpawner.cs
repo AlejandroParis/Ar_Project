@@ -37,11 +37,19 @@ public class PieceSpawner : MonoBehaviour
         // Check if there is a touch
         if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0))
         {
+            #if UNITY_ANDROID
             // Check if finger is over a UI element /*!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) ||*/
-            if (!EventSystem.current.IsPointerOverGameObject() && LevelManager.Instance.current_level.CheckPiecesAvailable(current_spawn_type) > 0)
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) && LevelManager.Instance.current_level.CheckPiecesAvailable(current_spawn_type) > 0)
             {
                 SpawnPiece();
             }
+            #endif
+            #if UNITY_STANDALONE
+             if (!EventSystem.current.IsPointerOverGameObject() && LevelManager.Instance.current_level.CheckPiecesAvailable(current_spawn_type) > 0)
+            {
+                SpawnPiece();
+            }
+            #endif
         }
         /*if ()
         {

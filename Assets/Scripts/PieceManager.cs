@@ -36,7 +36,6 @@ public class PieceManager : Singleton<PieceManager>
         {
             ((PortalPiece)piece).connected_portal = LevelManager.Instance.current_level.free_portal.transform.GetChild(0).gameObject;
             LevelManager.Instance.current_level.free_portal.GetComponent<PortalPiece>().connected_portal = piece.transform.GetChild(0).gameObject;
-            LevelManager.Instance.current_level.free_portal = null;
         }
         spawned_pieces.Add(piece.gameObject);
     }

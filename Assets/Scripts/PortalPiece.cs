@@ -12,6 +12,7 @@ public class PortalPiece : Piece
 
         BallManager.Instance.ball.controller.enabled = false;
         go.transform.position = connected_portal.transform.position;
+        BallManager.Instance.ball.SetPlatform(connected_portal.transform.parent.gameObject);
         BallManager.Instance.ball.controller.enabled = true;
     }
 
@@ -20,7 +21,6 @@ public class PortalPiece : Piece
         if (other.tag == "Ball" && BallManager.Instance.ball.current_platform != this.gameObject)
         {
             Teleport(other.gameObject);
-            BallManager.Instance.ball.SetPlatform(connected_portal.transform.parent.gameObject);
         }
     }
 }
