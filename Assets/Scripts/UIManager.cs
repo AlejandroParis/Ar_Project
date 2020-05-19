@@ -8,13 +8,18 @@ public class UIManager : Singleton<UIManager>
 {
     public GameObject canvas;
     public GameObject piece_buttons;
+    public GameObject level_selection;
+    public GameObject run_button;
+    public GameObject pause_button;
+    public GameObject win_panel;
 
     enum CONTROL_BUTTONS { DEPLOY = 0, RUN, PAUSE};
     // Start is called before the first frame update
     void Start()
     {
         //canvas.transform.GetChild((int)CONTROL_BUTTONS.RUN).gameObject.SetActive(false);
-       // canvas.transform.GetChild((int)CONTROL_BUTTONS.PAUSE).gameObject.SetActive(false);
+        // canvas.transform.GetChild((int)CONTROL_BUTTONS.PAUSE).gameObject.SetActive(false);
+        DisableGUI();
     }
 
     // Update is called once per frame
@@ -37,6 +42,21 @@ public class UIManager : Singleton<UIManager>
     {
         piece_buttons.SetActive(true);
         UpdateAvailablePiecesButtons();
+    }
+
+    public void NextLevelButton()
+    {
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level++);
+    }
+
+    public void RestartButton()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void MenuButton()
+    {
+
     }
 
     public void ExitApp()
@@ -81,5 +101,36 @@ public class UIManager : Singleton<UIManager>
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).gameObject.GetComponent<Button>().interactable = false;
         }
+    }
+
+    public void DisableLevelSelection()
+    {
+        level_selection.SetActive(false);
+    }
+
+    public void EnableLevelSelection()
+    {
+        level_selection.SetActive(true);
+    }
+
+    public void DisableGUI()
+    {
+        piece_buttons.SetActive(false);
+        run_button.SetActive(false);
+        pause_button.SetActive(false);
+    }
+
+    public void EnableGui()
+    {
+        piece_buttons.SetActive(true);
+        run_button.SetActive(true);
+        pause_button.SetActive(true);
+    }
+
+    public void SelectLevel(int index)
+    {
+        DisableLevelSelection();
+        EnableGui();
+        LevelManager.Instance.LoadLevel(index - 1);
     }
 }

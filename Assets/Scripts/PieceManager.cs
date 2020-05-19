@@ -41,6 +41,16 @@ public class PieceManager : Singleton<PieceManager>
         spawned_pieces.Add(piece.gameObject);
     }
 
+    internal void Restart()
+    {
+        foreach (GameObject item in spawned_pieces)
+        {
+            Destroy(item);
+        }
+
+        spawned_pieces.Clear();
+    }
+
     internal void OnRun()
     {
         piece_spawner.gameObject.SetActive(false);
@@ -49,6 +59,5 @@ public class PieceManager : Singleton<PieceManager>
     internal void OnDeployment()
     {
        // piece_spawner.gameObject.SetActive(true);
-
     }
 }
