@@ -46,7 +46,7 @@ public class BallManager : Singleton<BallManager>
         {
             ball.enabled = false;
             ball.transform.position = transform.position;
-            ball.movement_direction = Vector3.right;
+            ball.Reset();
         }
         else
             Debug.Log("Error: Trying to reset non existing ball.");

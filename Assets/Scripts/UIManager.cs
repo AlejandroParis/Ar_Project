@@ -52,16 +52,19 @@ public class UIManager : Singleton<UIManager>
 
     public void NextLevelButton()
     {
-        LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level++);
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level + 1);
+        win_panel.SetActive(false);
     }
 
     public void RestartButton()
     {
         GameManager.Instance.Restart();
+        win_panel.SetActive(false);
     }
 
     public void MenuButton()
     {
+        win_panel.SetActive(false);
         DisableGUI();
         EnableLevelSelection();
     }

@@ -29,7 +29,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnBallFall()
     {
-        BallManager.Instance.ResetBall(current_level.start.transform);
+        GameManager.Instance.Restart();
     }
 
     public void OnTargetFound()
@@ -46,12 +46,12 @@ public class LevelManager : Singleton<LevelManager>
 
     internal bool HasNextLevel()
     {
-        return level_prefabs.Count >= (selected_level + 1);
+        return level_prefabs.Count > (selected_level + 1);
     }
 
     private void SpawnNewLevel(int index)
     {
-        if(level_prefabs.Count >= index)
+        if(level_prefabs.Count >= index && index >= 0)
         {
             selected_level = index;
             GameObject map = Instantiate(level_prefabs[selected_level]);
