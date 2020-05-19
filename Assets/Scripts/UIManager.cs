@@ -79,37 +79,45 @@ public class UIManager : Singleton<UIManager>
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Block) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Block).gameObject.GetComponent<Button>().interactable = true;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Block).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Block).ToString();
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Block).gameObject.GetComponent<Button>().interactable = false;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Block).GetChild(0).GetComponent<Text>().text = "0";
         }
 
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Portal) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).gameObject.GetComponent<Button>().interactable = true;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Portal).ToString();
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).gameObject.GetComponent<Button>().interactable = false;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Portal).GetChild(0).GetComponent<Text>().text = "0";
         }
 
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.SpeedBoost) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).gameObject.GetComponent<Button>().interactable = true;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.SpeedBoost).ToString();
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).gameObject.GetComponent<Button>().interactable = false;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.SpeedBoost).GetChild(0).GetComponent<Text>().text = "0";
         }
 
         if (LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Trampoline) > 0)
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).gameObject.GetComponent<Button>().interactable = true;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).GetChild(0).GetComponent<Text>().text = LevelManager.Instance.current_level.CheckPiecesAvailable(Piece.PieceType.Trampoline).ToString();
         }
         else
         {
             piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).gameObject.GetComponent<Button>().interactable = false;
+            piece_buttons.transform.GetChild((int)Piece.PieceType.Trampoline).GetChild(0).GetComponent<Text>().text = "0";
         }
     }
 
