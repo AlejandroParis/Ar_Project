@@ -24,6 +24,12 @@ public class UIManager : Singleton<UIManager>
         
     }
 
+    internal void OnReachEnd()
+    {
+        win_panel.SetActive(true);
+        win_panel.transform.GetChild(3).GetComponent<Button>().interactable = LevelManager.Instance.HasNextLevel();         
+    }
+
     public void OnPieceButtonClick(int type)
     {
         PieceManager.Instance.piece_spawner.SetSpawnerType((Piece.PieceType)type);
