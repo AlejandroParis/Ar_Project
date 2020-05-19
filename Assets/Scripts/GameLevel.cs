@@ -22,6 +22,7 @@ public class GameLevel : MonoBehaviour
     void Start()
     {
         BallManager.Instance.SpawnBall(transform, start.transform);
+        available_pieces_save = new int[available_pieces.Length];
         available_pieces_save[(int)Piece.PieceType.Block] = available_pieces[(int)Piece.PieceType.Block].number;
         available_pieces_save[(int)Piece.PieceType.Trampoline] = available_pieces[(int)Piece.PieceType.Trampoline].number;
         available_pieces_save[(int)Piece.PieceType.SpeedBoost] = available_pieces[(int)Piece.PieceType.SpeedBoost].number;

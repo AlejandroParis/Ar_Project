@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject level_selection;
     public GameObject run_button;
     public GameObject pause_button;
+    public GameObject restart_button;
     public GameObject win_panel;
 
     AudioSource ui_audio;
@@ -54,6 +55,7 @@ public class UIManager : Singleton<UIManager>
 
     internal void OnRestart()
     {
+        UpdateAvailablePiecesButtons();
         ui_audio.PlayOneShot(reset_sound, 2.0f);
     }
 
@@ -153,6 +155,7 @@ public class UIManager : Singleton<UIManager>
         piece_buttons.SetActive(false);
         run_button.SetActive(false);
         pause_button.SetActive(false);
+        restart_button.SetActive(false);
     }
 
     public void EnableGui()
@@ -160,6 +163,7 @@ public class UIManager : Singleton<UIManager>
         piece_buttons.SetActive(true);
         run_button.SetActive(true);
         pause_button.SetActive(true);
+        restart_button.SetActive(true);
     }
 
     public void SelectLevel(int index)

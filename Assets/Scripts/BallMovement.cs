@@ -61,12 +61,13 @@ public class BallMovement : MonoBehaviour
         //Apply gravity
         velocity.y += gravity * Time.deltaTime;
 
-        if (controller.isGrounded && !air)
-            velocity.y = 0;
-
         transform.Rotate(Vector3.forward, rotation_speed * velocity.magnitude * movement_direction.x * Time.deltaTime);    
         controller.Move(velocity * Time.deltaTime);
 
+        if (controller.isGrounded && !air)
+            velocity.y = 0;
+
+        Debug.Log(velocity.y);
         Debug.DrawLine(transform.position, transform.position + movement_direction * 2);
     }
 
@@ -75,7 +76,9 @@ public class BallMovement : MonoBehaviour
         transform.rotation = Quaternion.identity;
         movement_direction = transform.right;
         sprinting = false;
+        air = false;
         velocity = Vector3.zero;
+        current_platform = null;
     }
 
     private void Jump(Vector3 N)
