@@ -131,6 +131,6 @@ public class UIManager : Singleton<UIManager>
     {
         DisableLevelSelection();
         EnableGui();
-        LevelManager.LoadLevel(index - 1);
+        LevelManager.Instance.LoadLevel(index - 1);
     }
 }
