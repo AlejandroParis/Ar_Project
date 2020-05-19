@@ -13,35 +13,48 @@ public class UIManager : Singleton<UIManager>
     public GameObject pause_button;
     public GameObject win_panel;
 
+    AudioSource ui_audio;
+
+    [Header("Clips")]
+    public AudioClip victory_sound;
+    public AudioClip button_sound;
+    public AudioClip reset_sound;
+
     enum CONTROL_BUTTONS { DEPLOY = 0, RUN, PAUSE};
     // Start is called before the first frame update
     void Start()
     {
-        //canvas.transform.GetChild((int)CONTROL_BUTTONS.RUN).gameObject.SetActive(false);
-        // canvas.transform.GetChild((int)CONTROL_BUTTONS.PAUSE).gameObject.SetActive(false);
+        ui_audio = canvas.GetComponent<AudioSource>();
         DisableGUI();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     internal void OnReachEnd()
     {
+        ui_audio.PlayOneShot(victory_sound, 1.3f);
         win_panel.SetActive(true);
         win_panel.transform.GetChild(3).GetComponent<Button>().interactable = LevelManager.Instance.HasNextLevel();         
     }
 
+    internal void OnPause()
+    {
+        ui_audio.PlayOneShot(button_sound);
+    }
+
     public void OnPieceButtonClick(int type)
     {
+        ui_audio.PlayOneShot(button_sound);
         PieceManager.Instance.piece_spawner.SetSpawnerType((Piece.PieceType)type);
     }
 
     internal void OnRun()
     {
+        ui_audio.PlayOneShot(button_sound);
         piece_buttons.SetActive(false);
+    }
+
+    internal void OnRestart()
+    {
+        ui_audio.PlayOneShot(reset_sound, 2.0f);
     }
 
     internal void OnDeployment()
@@ -52,18 +65,21 @@ public class UIManager : Singleton<UIManager>
 
     public void NextLevelButton()
     {
+        ui_audio.PlayOneShot(button_sound);
         LevelManager.Instance.LoadLevel(LevelManager.Instance.selected_level + 1);
         win_panel.SetActive(false);
     }
 
     public void RestartButton()
     {
+        ui_audio.PlayOneShot(button_sound);
         win_panel.SetActive(false);
         GameManager.Instance.Restart();
     }
 
     public void MenuButton()
     {
+        ui_audio.PlayOneShot(button_sound);
         win_panel.SetActive(false);
         DisableGUI();
         EnableLevelSelection();
@@ -71,6 +87,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ExitApp()
     {
+        ui_audio.PlayOneShot(button_sound);
         Application.Quit();
     }
 
@@ -147,6 +164,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SelectLevel(int index)
     {
+        ui_audio.PlayOneShot(button_sound);
         DisableLevelSelection();
         EnableGui();
         LevelManager.Instance.LoadLevel(index - 1);

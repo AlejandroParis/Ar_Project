@@ -110,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_platform: {fileID: 0}
   controller: {fileID: 0}
+  movement_direction: {x: 0, y: 0, z: 0}
   movement_speed: 10
   acceleration: 5
   sprint_speed: 15

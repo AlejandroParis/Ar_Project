@@ -8,6 +8,8 @@ public class PortalPiece : Piece
 
     public void Teleport(GameObject go)
     {
+        GameManager.Instance.audio.PlayOneShot(BallManager.Instance.portal_sound);
+
         BallManager.Instance.ball.controller.enabled = false;
         go.transform.position = connected_portal.transform.position;
         BallManager.Instance.ball.controller.enabled = true;

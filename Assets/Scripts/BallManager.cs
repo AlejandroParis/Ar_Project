@@ -8,17 +8,10 @@ public class BallManager : Singleton<BallManager>
     public GameObject selected_ball;
     public BallMovement ball;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Clips")]
+    public AudioClip portal_sound;
+    public AudioClip trampoline_sound;
+    public AudioClip speed_sound;
 
     internal void SpawnBall(Transform map, Transform start)
     {

@@ -41,15 +41,13 @@ public class BallMovement : MonoBehaviour
                 sprinting = false;
 
         }
-
         if ((controller.collisionFlags & CollisionFlags.Sides) != 0) //Check if controller has collided from the side to swap direction.
         {
-            movement_direction = -movement_direction;
-            velocity = Vector3.zero;
+              movement_direction = -movement_direction;
+              velocity = -velocity;
         }
-           
 
-        if(!controller.isGrounded && !air) //fuck this
+        if (!controller.isGrounded && !air) //fuck this
         {
             velocity.y = movement_direction.y * (sprinting ? sprint_speed : movement_speed);
             air = true;
@@ -63,6 +61,9 @@ public class BallMovement : MonoBehaviour
         //Apply gravity
         velocity.y += gravity * Time.deltaTime;
 
+        if (controller.isGrounded && !air)
+            velocity.y = 0;
+
         transform.Rotate(Vector3.forward, rotation_speed * velocity.magnitude * movement_direction.x * Time.deltaTime);    
         controller.Move(velocity * Time.deltaTime);
 
@@ -73,11 +74,14 @@ public class BallMovement : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
         movement_direction = transform.right;
+        sprinting = false;
         velocity = Vector3.zero;
     }
 
     private void Jump(Vector3 N)
     {
+        GameManager.Instance.audio.PlayOneShot(BallManager.Instance.trampoline_sound);
+
         air = true;
         if ((N.x < 0 && movement_direction.x > 0) || (N.x > 0 && movement_direction.x < 0))
         {
@@ -90,11 +94,14 @@ public class BallMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.tag == "Piece")
+        if (hit.gameObject.tag == "Piece" && current_platform != hit.gameObject)
         {
             Piece piece = hit.gameObject.GetComponent<Piece>();
 
-            if (current_platform != piece.gameObject && piece.type == Piece.PieceType.Trampoline)
+            if (piece.type != Piece.PieceType.Portal && piece.type != Piece.PieceType.Trampoline)
+                SetPlatform(piece.gameObject);
+
+            if (piece.type == Piece.PieceType.Trampoline)
             {
                 Vector3 N = hit.transform.up;
                 Jump(N);
@@ -102,26 +109,32 @@ public class BallMovement : MonoBehaviour
 
             if (piece.type == Piece.PieceType.SpeedBoost)
             {
+                if(!sprinting)
+                    GameManager.Instance.audio.PlayOneShot(BallManager.Instance.speed_sound);
+                velocity.x = movement_direction.x * sprint_speed;
                 sprinting = true;
                 sprint_timer = 0.0f;
             }
-
-            if (current_platform != piece.gameObject && piece.type != Piece.PieceType.Portal && piece.type != Piece.PieceType.Trampoline)
-                SetPlatform(piece.gameObject);
         }
 
     }
 
     public void SetPlatform(GameObject gameObject)
     {
+        Debug.Log(gameObject.name);
         velocity.y = 0;
         air = false;
         Vector3 N = gameObject.transform.up;
         N = Quaternion.Euler(0, 0, -90) * N;
 
-        if (N.y > 0.6)
+        float angle = Vector3.Angle(new Vector3(Mathf.Abs(movement_direction.x), Mathf.Abs(movement_direction.y), Mathf.Abs(movement_direction.z)), N);
+
+        Debug.Log(angle + "from  " + movement_direction + N);
+        if (angle > 80)
+        {
             return;
-            
+        }
+                   
         if (movement_direction.x < 0)
             N = -N;
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public AudioSource audio;
+
     public enum GameState
     {
         Deployment,
@@ -18,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class GameManager : Singleton<GameManager>
     {
         game_state = GameState.Paused;
 
+        UIManager.Instance.OnPause();
         BallManager.Instance.LockBall();
     }
 
@@ -60,7 +63,7 @@ public class GameManager : Singleton<GameManager>
     {
         PieceManager.Instance.Restart();
         BallManager.Instance.ResetBall(LevelManager.Instance.current_level.start.transform);
-        UIManager.Instance.UpdateAvailablePiecesButtons();
+        UIManager.Instance.OnRestart();
 
         StartDeploymentPhase();
     }
