@@ -46,6 +46,7 @@ public class BallManager : Singleton<BallManager>
         {
             ball.enabled = false;
             ball.transform.position = transform.position;
+            ball.movement_direction = Vector3.right;
         }
         else
             Debug.Log("Error: Trying to reset non existing ball.");
@@ -57,5 +58,15 @@ public class BallManager : Singleton<BallManager>
             ball.enabled = false;
         else
             Debug.Log("Error: Trying to lock non existing ball.");
+    }
+
+    internal void DestroyBall()
+    {
+        if (ball)
+        {
+            Destroy(ball.gameObject);
+            ball = null;
+        }
+            
     }
 }

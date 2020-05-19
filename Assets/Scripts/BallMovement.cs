@@ -8,7 +8,7 @@ public class BallMovement : MonoBehaviour
     public GameObject current_platform = null;
     public CharacterController controller;
    
-    Vector3 movement_direction;
+    public Vector3 movement_direction;
     Vector3 velocity;
     bool air = false;
 
@@ -27,7 +27,7 @@ public class BallMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        movement_direction = transform.right;
+        movement_direction = Vector3.right;
     }
 
     // Update is called once per frame

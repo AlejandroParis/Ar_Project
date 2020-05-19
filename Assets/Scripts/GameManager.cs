@@ -55,4 +55,12 @@ public class GameManager : Singleton<GameManager>
         PieceManager.Instance.OnDeployment();
         UIManager.Instance.OnDeployment();
     }
+
+    internal void Restart()
+    {
+        game_state = GameState.Deployment;
+
+        PieceManager.Instance.Restart();
+        BallManager.Instance.ResetBall(LevelManager.Instance.current_level.start.transform);
+    }
 }
