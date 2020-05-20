@@ -9,7 +9,7 @@ Repository of AR game. Place different kinds of magic blocks to allow the ball t
 * [Google Slides](https://docs.google.com/presentation/d/1FAPSgNNyMJtpc8cPXRl-HxLOrk3DmZG_7j_5Xw6Z5Lo/edit?usp=sharing)
 
 ## Video
-* [Demo]()
+* [Youtube]()
 
 ## Github
 * [Repository](https://github.com/AlejandroParis/Ar_Project)
