@@ -1,5 +1,5 @@
 # Bazzle
-Repository of AR game. Place different kinds of magic block to allow the ball to reach the magic source!
+Repository of AR game. Place different kinds of magic blocks to allow the ball to reach the magic source!
 
 ## Resources
 * [Target 1](https://github.com/AlejandroParis/Ar_Project/blob/master/Assets/Editor/Vuforia/ImageTargetTextures/DeviceDB/Poker_1_scaled.jpg)
