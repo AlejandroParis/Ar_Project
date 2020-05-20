@@ -6,7 +6,7 @@ Repository of AR game. Place different kinds of magic block to allow the ball to
 * [Target 2](https://github.com/AlejandroParis/Ar_Project/blob/master/Assets/Editor/Vuforia/ImageTargetTextures/DeviceDB/Poker_3_scaled.jpg)
 
 ## Slides
-* [Powerpoint](https://docs.google.com/presentation/d/1FAPSgNNyMJtpc8cPXRl-HxLOrk3DmZG_7j_5Xw6Z5Lo/edit#slide=id.p)
+* [Powerpoint](https://docs.google.com/presentation/d/1FAPSgNNyMJtpc8cPXRl-HxLOrk3DmZG_7j_5Xw6Z5Lo/edit?usp=sharing)
 
 ## Video
 * [Demo]()
